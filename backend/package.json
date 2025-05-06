@@ -1,0 +1,29 @@
+{
+  "name": "advicehub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm start",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "PraveenN1",
+  "license": "ISC",
+  "description": "Backend scripts for advicehub",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "geoip-lite": "^1.4.10",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
