@@ -3,16 +3,16 @@ import Navbar from '@/components/ui/Navbar'
 import Sidebar1 from '@/components/homepage/Sidebar1'
 import Content from '@/components/homepage/Content'
 // import Sidebar2 from '@/components/homepage/Sidebar2'
-export const Home = () => {
+export const Layout = ({children}) => {
   return (
     <div className='flex'>
+      
       <div className='fixed w-full'>
       <Navbar/>
       </div>
-      <div className='flex h-svh w-full'>
+      <div className='flex h-svh w-full mb-5'>
         <Sidebar1/>
-        <Content/>
-        {/* <Sidebar2/> */}
+        {children}
       </div>
     </div>
   )

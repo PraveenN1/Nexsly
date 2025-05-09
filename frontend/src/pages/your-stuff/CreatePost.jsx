@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "@/components/ui/Navbar";
-import Sidebar1 from "@/components/homepage/Sidebar1";
-
+import { Layout } from "@/components/ui/Layout";
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -36,26 +34,24 @@ const CreatePost = () => {
     try {
       const token = localStorage.getItem("token"); // or from your auth state
       const response = await axios.post(
-        "http://localhost:3000/user/posts/create-post",
+        "http://localhost:3000/posts/create-post",
         { title, content, selectedTags },
-        { withCredentials:true }
+        { withCredentials: true }
       );
       console.log(response.data);
       alert("Post created successfully");
+      setTitle("");
+      setContent("");
+      setSelectedTags([]);
     } catch (error) {
       console.error("Error creating post:", error);
-      alert("Signup to create post");
+      alert("Error creating post");
     }
   };
 
   return (
     <>
-      <div className="fixed w-full">
-        <Navbar />
-      </div>
-
-      <div className="flex h-svh w-full">
-        <Sidebar1 />
+      <Layout>
         <div className="min-h-screen p-6  mt-20 lg:ml-64 bg-[#0E1113] flex flex-col items-center">
           <form
             onSubmit={handleSubmit}
@@ -82,21 +78,23 @@ const CreatePost = () => {
 
             <div className="mb-4">
               <h3 className="text-white">Select Tags:</h3>
-              <div className="flex flex-wrap justify-evenly gap-2 max-h-[300px] overflow-auto">
-                {tags.map((tag) => (
-                  <button
-                    key={tag._id}
-                    type="button"
-                    onClick={() => handleTagSelect(tag._id)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium ${
-                      selectedTags.includes(tag._id)
-                        ? "bg-gray-500 text-white"
-                        : "bg-gray-700 text-white"
-                    }`}
-                  >
-                    {tag.name}
-                  </button>
-                ))}
+              <div className="flex flex-wrap justify-around gap-2 max-h-[300px] overflow-auto">
+                {[...tags]
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((tag) => (
+                    <button
+                      key={tag._id}
+                      type="button"
+                      onClick={() => handleTagSelect(tag._id)}
+                      className={`px-4 py-2 mb-1  rounded-full text-sm font-medium ${
+                        selectedTags.includes(tag._id)
+                          ? "bg-gray-500 text-white"
+                          : "bg-gray-700 text-white"
+                      }`}
+                    >
+                      {tag.name}
+                    </button>
+                  ))}
               </div>
             </div>
 
@@ -108,7 +106,7 @@ const CreatePost = () => {
             </button>
           </form>
         </div>
-      </div>
+      </Layout>
     </>
   );
 };

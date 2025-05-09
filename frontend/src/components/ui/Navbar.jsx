@@ -31,21 +31,21 @@ const Navbar = () => {
   return (
     <div className="flex gap-4 items-center justify-between px-6 py-3 bg-[#0E1113] border-b w-full">
       {/* Logo */}
-      <div className="flex items-center gap-2">
-        <div className="font-bold text-2xl text-white ml-5">@ Nexsly</div>
+      <div className="flex items-center gap-2 ml-10">
+        <div className="font-bold text-2xl text-white ">@ Nexsly</div>
       </div>
 
       {/* Search Bar */}
-      <div className="flex-1 mx-4 max-w-2xl">
+      {/* <div className="flex justify-center ml-59 max-w-[20rem]">
         <input
           type="text"
           placeholder="Search..."
-          className="w-full p-2 px-4 rounded-full bg-[#1B262C] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 px-4 rounded-full bg-[#1B262C] text-white focus:outline-none focus:ring-2 focus:ring-white-500"
         />
-      </div>
+      </div> */}
 
       {/* Buttons */}
-      <div className="flex items-center gap-4 relative">
+      <div className="flex items-center gap-4 relative mr-10">
         <Link to="/create-post">
           <button className="bg-[#0F4C75] hover:bg-[#5a7a8ead] text-white rounded-full px-5 py-2 transition">
             Create
