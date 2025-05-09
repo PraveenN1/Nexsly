@@ -11,10 +11,9 @@ const otpLimiter = rateLimit({
   message: 'Too many OTP requests, try again later.'
 });
 
-// POST /auth/send-otp
+// POST /auth/send-code
 router.post('/send-code', otpLimiter, sendOTP);
-
-// POST /auth/verify-otp
+// POST /auth/verify-code
 router.post('/verify-code',verifyOTP);
 
 //POST /auth/user-login

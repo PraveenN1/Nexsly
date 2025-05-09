@@ -1,9 +1,14 @@
 const express=require("express");
-const { createPost, getAllPosts,getUserPosts,deletePost, getPopularTags } = require("../controllers/posts");
-const {getUserDetails}=require("../controllers/user");
+const router=express.Router();
 const {authenticateToken}=require("../middlewares/authenticate");
 const { postValidator } = require("../middlewares/post/userInputValidator");
-const router=express.Router();
+const { 
+    createPost, 
+    getAllPosts,
+    deletePost, 
+    upvotePost, 
+    viewPost
+} = require("../controllers/posts");
 
 //POST /posts/create-post
 router.post('/create-post',authenticateToken("token"),postValidator,createPost);
@@ -12,6 +17,12 @@ router.post('/create-post',authenticateToken("token"),postValidator,createPost);
 router.delete('/delete-post',authenticateToken("token"),deletePost);
 
 //GET /posts/get-allposts
-router.get('/posts/get-allposts',getAllPosts);
+router.get('/get-allposts',getAllPosts);
+
+//POST /posts/upvote/:postId
+router.post('/upvote/:postId',authenticateToken("token"),upvotePost);
+
+//GET /posts/view-post/:postId
+router.get('/:postId',authenticateToken("token"),viewPost);
 
 module.exports=router;

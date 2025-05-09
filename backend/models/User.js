@@ -22,6 +22,10 @@ const userSchema=new Schema({
         type:mongoose.Types.ObjectId,
         ref:'Tag'
     }],
+    isDeleted:{
+        type:Boolean,
+        default:false
+    }
 },{
     timestamps:true,
 });

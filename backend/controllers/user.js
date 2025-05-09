@@ -11,7 +11,7 @@ async function getUserDetails(req,res) {
         const user = await User.findById(req.user.userId)
             // .populate('tags')
             // .populate('posts');
-            
+        console.log(user);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -22,7 +22,7 @@ async function getUserDetails(req,res) {
             email: user.email,
             isGuest: user.isGuest,
             tags: user.tags,
-            posts: user.posts,
+            // posts: user.posts,
             createdAt: user.createdAt
         });
     } catch (err) {
@@ -34,6 +34,30 @@ async function getUserDetails(req,res) {
     }
 }
 
-//Delete user account - 2 flexible options can keep the posts or delete them 
+async function handleDeleteUser(req, res) {
+    try {
+      const userId = req.user.userId;
+      const randomSuffix = Math.random().toString(36).substring(2, 8);
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        {
+          username: `[deleted-user-${randomSuffix}]`,
+          email: `${randomSuffix}`,
+          isDeleted:true,
+        },
+        { new: true }
+      );
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      res.status(200).json({ message: "User soft-deleted", user: updatedUser });
+    } catch (err) {
+      console.error("Delete error:", err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+  
 
-module.exports={getUserDetails};
+module.exports={getUserDetails,handleDeleteUser};

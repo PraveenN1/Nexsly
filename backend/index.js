@@ -5,10 +5,12 @@ const express=require("express");
 const mongoose = require("mongoose");
 const cookieParser=require("cookie-parser");
 const cors=require("cors");
+
 const authRoutes=require("./routes/authRoutes");
 const postRoutes=require("./routes/postRoutes");
 const userRoutes=require("./routes/userRoutes");
 const tagsRoutes=require("./routes/tagsRoutes");
+const replyRoutes=require("./routes/replyRoutes");
 
 const app=express();
 const PORT=process.env.PORT;
@@ -30,8 +32,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/auth',authRoutes);
 app.use('/user',userRoutes);
-app.use('/post',postRoutes);
+app.use('/posts',postRoutes);
 app.use('/tags',tagsRoutes);
+app.use('/reply',replyRoutes);
 
 app.get("/",(req,res)=>{
     res.send("Welcome to AdviceHub");

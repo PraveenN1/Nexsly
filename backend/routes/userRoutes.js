@@ -1,6 +1,6 @@
 const express=require("express");
 const {getUserPosts} = require("../controllers/posts");
-const {getUserDetails}=require("../controllers/user");
+const {getUserDetails , handleDeleteUser}=require("../controllers/user");
 const {authenticateToken}=require("../middlewares/authenticate");
 const router=express.Router();
 
@@ -10,5 +10,7 @@ router.get('/get-userposts', authenticateToken("token"), getUserPosts);
 //GET /user/get-userdetails
 router.get('/get-userdetails',authenticateToken("token") ,getUserDetails);
 
+//DELETE /user/delete-user
+router.put('/delete-user',authenticateToken("token"),handleDeleteUser);
 
 module.exports=router;
